@@ -1,46 +1,46 @@
-# 日语视频字幕自动生成工具 🎬
+# Japanese Video Subtitle Generator 🎬
 
-一个基于 faster-whisper 的本地日语视频字幕生成工具，支持多语言字幕、GPU 加速、实时进度显示和断点续传。
+A local Japanese video subtitle generation tool based on faster-whisper, supporting multi-language subtitles, GPU acceleration, real-time progress display, and resume from breakpoints.
 
-## ✨ 功能特点
+## ✨ Features
 
-- 🎯 **日语语音识别**：使用 OpenAI Whisper 模型，专门针对日语优化
-- 🌐 **多语言字幕**：支持生成日语、英语、中文字幕（可选）
-- 🚀 **GPU 加速**：自动检测 NVIDIA GPU，Windows 下速度提升 5-10 倍
-- 📊 **实时进度**：可视化进度条，清晰显示处理进度和预估剩余时间
-- 💾 **断点续传**：处理中断后自动保存进度，下次运行继续处理
-- 📁 **批量处理**：自动处理文件夹中所有视频文件
-- 📝 **标准 SRT 输出**：生成通用的 SRT 字幕文件
-- 🔥 **字幕烧录**：可选将字幕永久嵌入视频（硬字幕）
+- 🎯 **Japanese Speech Recognition**: Uses OpenAI Whisper model, optimized for Japanese
+- 🌐 **Multi-language Subtitles**: Generate Japanese, English, or Chinese subtitles
+- 🚀 **GPU Acceleration**: Auto-detects NVIDIA GPU, 5-10x faster on Windows with CUDA
+- 📊 **Real-time Progress**: Visual progress bar showing processing status and ETA
+- 💾 **Resume Support**: Auto-saves progress, continues from where you left off
+- 📁 **Batch Processing**: Automatically processes all video files in a folder
+- 📝 **Standard SRT Output**: Generates universal SRT subtitle files
+- 🔥 **Subtitle Burning**: Optionally burn subtitles permanently into video (hardcoded)
 
-## 🖥️ 跨平台支持
+## 🖥️ Cross-Platform Support
 
-| 平台 | 计算设备 | 相对速度 |
-|------|----------|----------|
-| Windows + NVIDIA GPU | CUDA (float16) | ⚡ **最快 (5-10x)** |
-| Linux + NVIDIA GPU | CUDA (float16) | ⚡ **最快 (5-10x)** |
-| macOS Apple Silicon | CPU (int8) | 🔹 基准速度 |
-| macOS Intel / 其他 | CPU (int8) | 🔹 基准速度 |
+| Platform | Compute Device | Relative Speed |
+|----------|----------------|----------------|
+| Windows + NVIDIA GPU | CUDA (float16) | ⚡ **Fastest (5-10x)** |
+| Linux + NVIDIA GPU | CUDA (float16) | ⚡ **Fastest (5-10x)** |
+| macOS Apple Silicon | CPU (int8) | 🔹 Baseline |
+| macOS Intel / Others | CPU (int8) | 🔹 Baseline |
 
-程序会**自动检测**你的硬件环境并选择最佳配置，无需手动设置。
+The program **automatically detects** your hardware and selects the best configuration.
 
-## 📋 系统要求
+## 📋 Requirements
 
-- **Python**：3.9 或更高版本
-- **ffmpeg**：用于字幕烧录功能
-- **磁盘空间**：模型文件约 1-3GB（取决于选择的模型大小）
-- **显存（GPU 用户）**：建议 8GB 以上，16GB 可运行 large-v3 模型
+- **Python**: 3.9 or higher
+- **ffmpeg**: For subtitle burning feature
+- **Disk Space**: ~1-3GB for model files (depends on model size)
+- **VRAM (GPU users)**: 8GB+ recommended, 16GB can run large-v3 model
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 克隆项目
+### 1. Clone the Project
 
 ```bash
 git clone https://github.com/leoLanxi/translate.git
 cd translate
 ```
 
-### 2. 创建虚拟环境（推荐）
+### 2. Create Virtual Environment (Recommended)
 
 ```bash
 # Windows
@@ -52,185 +52,185 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. 安装依赖
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. 安装 ffmpeg
+### 4. Install ffmpeg
 
 ```bash
 # macOS
 brew install ffmpeg
 
-# Windows (使用 Chocolatey)
+# Windows (using Chocolatey)
 choco install ffmpeg
 
-# Windows (手动安装)
-# 从 https://ffmpeg.org/download.html 下载并添加到 PATH
+# Windows (manual)
+# Download from https://ffmpeg.org/download.html and add to PATH
 
 # Ubuntu/Debian
 sudo apt install ffmpeg
 ```
 
-### 5. 准备视频文件
+### 5. Prepare Video Files
 
-将需要处理的视频文件放入 `input_videos` 文件夹。
+Place your video files in the `input_videos` folder.
 
-### 6. 运行程序
+### 6. Run
 
 ```bash
 python main.py
 ```
 
-## ⚙️ 配置选项
+## ⚙️ Configuration
 
-在 `main.py` 文件顶部可以修改以下配置：
+Edit the configuration section at the top of `main.py`:
 
 ```python
-# 输入/输出文件夹
-INPUT_DIR = "input_videos"    # 存放原始视频的文件夹
-OUTPUT_DIR = "output"         # 输出字幕和视频的文件夹
+# Input/Output folders
+INPUT_DIR = "input_videos"    # Folder containing source videos
+OUTPUT_DIR = "output"         # Output folder for subtitles and videos
 
-# 是否烧录字幕
-BURN_SUBTITLE = True          # True: 生成带字幕的视频, False: 仅生成 .srt 文件
+# Burn subtitles into video
+BURN_SUBTITLE = True          # True: generate video with hardcoded subs, False: SRT only
 
-# 字幕语言设置（重要！）
-SUBTITLE_LANGUAGE = "zh"      # 可选: "ja" (日语), "en" (英语), "zh" (中文)
+# Subtitle language (Important!)
+SUBTITLE_LANGUAGE = "zh"      # Options: "ja" (Japanese), "en" (English), "zh" (Chinese)
 
-# 模型大小（影响速度和准确度）
-MODEL_SIZE = "medium"         # 可选: tiny, base, small, medium, large-v2, large-v3
+# Model size (affects speed and accuracy)
+MODEL_SIZE = "medium"         # Options: tiny, base, small, medium, large-v2, large-v3
 ```
 
-### 字幕语言说明
+### Subtitle Language Options
 
-| 语言代码 | 输出字幕 | 实现方式 |
-|----------|----------|----------|
-| `ja` | 日语（原文） | Whisper 语音识别 |
-| `en` | 英语 | Whisper 内置翻译（速度快） |
-| `zh` | 中文 | 语音识别 + Google 翻译 |
+| Code | Output | Implementation |
+|------|--------|----------------|
+| `ja` | Japanese (original) | Whisper transcription |
+| `en` | English | Whisper built-in translation (fast) |
+| `zh` | Chinese | Transcription + Google Translate |
 
-### 模型大小对比
+### Model Size Comparison
 
-| 模型 | 大小 | 显存需求 | 相对速度 | 日语效果 |
-|------|------|----------|----------|----------|
-| tiny | ~75MB | ~1GB | 最快 | 一般 |
-| base | ~150MB | ~1GB | 很快 | 较好 |
-| small | ~500MB | ~2GB | 快 | 好 |
-| medium | ~1.5GB | ~5GB | 中等 | 很好 |
-| large-v3 | ~3GB | ~10GB | 较慢 | 最好 |
+| Model | Size | VRAM | Speed | Japanese Quality |
+|-------|------|------|-------|------------------|
+| tiny | ~75MB | ~1GB | Fastest | Fair |
+| base | ~150MB | ~1GB | Very Fast | Good |
+| small | ~500MB | ~2GB | Fast | Better |
+| medium | ~1.5GB | ~5GB | Medium | Very Good |
+| large-v3 | ~3GB | ~10GB | Slower | Best |
 
-**推荐**：
-- 快速预览/测试：使用 `small`
-- 日常使用：使用 `medium`（平衡速度和质量）
-- 追求最高质量：使用 `large-v3`
+**Recommendations**:
+- Quick preview/testing: `small`
+- Daily use: `medium` (balanced speed and quality)
+- Best quality: `large-v3`
 
-## 📊 进度显示
+## 📊 Progress Display
 
-程序运行时会显示实时进度：
-
-```
-  🎤 开始语音识别...
-  📊 视频时长: 43分22秒
-  识别进度: |████████████████████████████████| 2622/2622秒 [03:45<00:00, 11.6秒/s]
-  ✓ 语音识别完成，共 115 个字幕片段
-
-  📝 开始翻译字幕 (日语 → 中文)...
-  翻译进度: |████████████████████████████████| 115/115 [00:23<00:00]
-  ✓ 翻译完成
-
-  🔥 开始烧录字幕到视频...
-  烧录进度: |████████████████████████████████| 2622/2622秒 [04:12<00:00]
-  ✓ 带字幕视频已保存
-
-  ⏱ 总耗时: 8分20秒
-```
-
-## 💾 断点续传
-
-如果处理过程中中断（Ctrl+C 或程序崩溃）：
-
-1. 进度会自动保存到 `output/progress.json`
-2. 下次运行程序会自动检测并询问是否继续
-3. 选择继续后，会从上次中断的位置继续处理
+The program shows real-time progress:
 
 ```
-💾 发现未完成的任务: video.mp4
-   进度: 1234.5/2622.0秒
-   将自动恢复...
+  🎤 Starting speech recognition...
+  📊 Video duration: 43m 22s
+  Recognition: |████████████████████████| 2622/2622s [03:45<00:00, 11.6s/s]
+  ✓ Recognition complete, 115 subtitle segments
+
+  📝 Translating subtitles (Japanese → Chinese)...
+  Translation: |████████████████████████| 115/115 [00:23<00:00]
+  ✓ Translation complete
+
+  🔥 Burning subtitles to video...
+  Burning: |████████████████████████| 2622/2622s [04:12<00:00]
+  ✓ Video with subtitles saved
+
+  ⏱ Total time: 8m 20s
 ```
 
-## 📂 输出文件
+## 💾 Resume from Breakpoint
 
-处理完成后，`output` 文件夹中会包含：
+If processing is interrupted (Ctrl+C or crash):
+
+1. Progress is automatically saved to `output/progress.json`
+2. Next run will detect and offer to resume
+3. Processing continues from where it left off
+
+```
+💾 Found incomplete task: video.mp4
+   Progress: 1234.5/2622.0s
+   Resuming automatically...
+```
+
+## 📂 Output Files
+
+After processing, the `output` folder contains:
 
 ```
 output/
-├── video1_zh.srt           # 中文字幕文件
-├── video1_zh_subbed.mp4    # 带中文字幕的视频
-├── video2_en.srt           # 英文字幕文件
-├── video2_en_subbed.mp4    # 带英文字幕的视频
+├── video1_zh.srt           # Chinese subtitle file
+├── video1_zh_subbed.mp4    # Video with Chinese subtitles
+├── video2_en.srt           # English subtitle file
+├── video2_en_subbed.mp4    # Video with English subtitles
 └── ...
 ```
 
-## 🔧 常见问题
+## 🔧 Troubleshooting
 
-### Q: GPU 没有被检测到？
+### Q: GPU not detected?
 
-确保已安装 NVIDIA 驱动和 CUDA：
+Make sure NVIDIA drivers and CUDA are installed:
 ```bash
-# 检查 GPU 是否可用
+# Check if GPU is available
 nvidia-smi
 ```
 
-### Q: 模型下载失败怎么办？
+### Q: Model download failed?
 
-首次运行时会从 Hugging Face 下载模型，如果网络不稳定：
-1. 尝试使用代理或 VPN
-2. 或者手动下载模型放到 `~/.cache/huggingface/` 目录
+The model downloads from Hugging Face on first run. If network is unstable:
+1. Try using a proxy or VPN
+2. Or manually download the model to `~/.cache/huggingface/`
 
-### Q: 识别速度太慢？
+### Q: Processing too slow?
 
-1. 使用更小的模型（如 `small` 或 `base`）
-2. 如果有 NVIDIA GPU，确保 CUDA 正常工作
-3. faster-whisper 已经比原版 whisper 快 4-5 倍
+1. Use a smaller model (`small` or `base`)
+2. If you have NVIDIA GPU, ensure CUDA is working
+3. faster-whisper is already 4-5x faster than original whisper
 
-### Q: 翻译不准确？
+### Q: Translation not accurate?
 
-翻译使用的是 Google 翻译免费接口，对于专业术语可能不够准确。可以：
-1. 生成 SRT 文件后手动修改
-2. 使用字幕编辑软件（如 Aegisub）微调
+Translation uses Google Translate free API, which may not be accurate for technical terms. You can:
+1. Edit the SRT file manually after generation
+2. Use subtitle editing software (e.g., Aegisub) for fine-tuning
 
-### Q: Windows 上 ffmpeg 报错？
+### Q: ffmpeg error on Windows?
 
-确保 ffmpeg 已添加到系统 PATH：
-1. 下载 ffmpeg：https://ffmpeg.org/download.html
-2. 解压后将 `bin` 目录添加到系统环境变量 PATH
+Make sure ffmpeg is added to system PATH:
+1. Download ffmpeg: https://ffmpeg.org/download.html
+2. Extract and add the `bin` directory to system PATH
 
-## 📜 SRT 字幕格式
+## 📜 SRT Format
 
-生成的 SRT 文件格式如下：
+Generated SRT files follow this format:
 
 ```srt
 1
 00:00:01,000 --> 00:00:04,500
-这是第一句字幕。
+This is the first subtitle.
 
 2
 00:00:05,200 --> 00:00:08,300
-这是第二句字幕。
+This is the second subtitle.
 ```
 
-这种格式可以被大多数视频播放器识别（VLC、PotPlayer、IINA 等）。
+This format is recognized by most video players (VLC, PotPlayer, IINA, etc.).
 
-## 📄 许可证
+## 📄 License
 
-MIT License - 自由使用和修改
+MIT License - Free to use and modify
 
-## 🙏 致谢
+## 🙏 Acknowledgments
 
-- [OpenAI Whisper](https://github.com/openai/whisper) - 强大的语音识别模型
-- [faster-whisper](https://github.com/SYSTRAN/faster-whisper) - Whisper 的高性能实现
-- [deep-translator](https://github.com/nidhaloff/deep-translator) - 多引擎翻译库
-- [FFmpeg](https://ffmpeg.org/) - 多媒体处理工具
+- [OpenAI Whisper](https://github.com/openai/whisper) - Powerful speech recognition model
+- [faster-whisper](https://github.com/SYSTRAN/faster-whisper) - High-performance Whisper implementation
+- [deep-translator](https://github.com/nidhaloff/deep-translator) - Multi-engine translation library
+- [FFmpeg](https://ffmpeg.org/) - Multimedia processing tool

@@ -1,34 +1,34 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-日语视频字幕自动生成工具 v3.0（多语言 + GPU加速 + 进度显示）
-============================================================
+Japanese Video Subtitle Generator v3.0
+======================================
 
-功能说明：
-    1. 批量读取指定文件夹中的视频文件（支持 mp4, mkv, avi, mov）
-    2. 使用 faster-whisper 模型进行日语语音识别
-    3. 支持生成日语/英语/中文字幕（可选）
-    4. 自动检测 GPU/CPU，Windows CUDA 自动加速
-    5. 实时进度条显示处理进度
-    6. 支持断点续传（中断后可继续）
-    7. 可选将字幕烧录（硬字幕）到视频中
+Features:
+    1. Batch process video files (mp4, mkv, avi, mov)
+    2. Japanese speech recognition using faster-whisper
+    3. Multi-language subtitles: Japanese, English, Chinese
+    4. Auto-detect GPU/CPU, CUDA acceleration on Windows
+    5. Real-time progress bar display
+    6. Resume from breakpoint support
+    7. Optional subtitle burning (hardcoded subtitles)
 
-跨平台支持：
-    - macOS (Apple Silicon M1/M2/M3) - 使用 CPU
-    - Windows (NVIDIA GPU) - 使用 CUDA 加速
-    - Linux (NVIDIA GPU) - 使用 CUDA 加速
+Cross-platform:
+    - macOS (Apple Silicon M1/M2/M3) - CPU mode
+    - Windows (NVIDIA GPU) - CUDA acceleration
+    - Linux (NVIDIA GPU) - CUDA acceleration
 
-安装依赖：
+Install:
     pip install -r requirements.txt
 
-    # Windows CUDA 加速额外安装（可选）：
+    # Windows CUDA (optional):
     pip install nvidia-cublas-cu11 nvidia-cudnn-cu11
 
-运行方式：
+Usage:
     python main.py
 
-作者：AI Assistant
-日期：2024
+Author: leoLanxi
+Date: 2024
 """
 
 import os

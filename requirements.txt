@@ -1,42 +1,41 @@
-# 日语视频字幕自动生成工具 v3.0 - Python 依赖列表
-# =============================================
+# Japanese Video Subtitle Generator v3.0 - Python Dependencies
+# ============================================================
 #
-# 安装方式：
+# Install:
 #   pip install -r requirements.txt
 #
-# ========== 跨平台支持 ==========
+# ========== Cross-Platform Support ==========
 #
 # macOS (Apple Silicon M1/M2/M3):
-#   - 自动使用 CPU 模式
-#   - 如果遇到安装问题，请确保 Xcode Command Line Tools 已安装：
+#   - Auto uses CPU mode
+#   - If installation fails, ensure Xcode Command Line Tools is installed:
 #     xcode-select --install
 #
-# Windows (NVIDIA GPU - 推荐 RTX 30/40/50 系列):
-#   - 自动检测 CUDA，启用 GPU 加速（速度提升 5-10 倍）
-#   - 额外安装 CUDA 支持（可选，通常自动安装）：
+# Windows (NVIDIA GPU - RTX 30/40/50 series recommended):
+#   - Auto detects CUDA, enables GPU acceleration (5-10x faster)
+#   - Optional CUDA support (usually auto-installed):
 #     pip install nvidia-cublas-cu11 nvidia-cudnn-cu11
 #
 # Linux (NVIDIA GPU):
-#   - 同 Windows，自动启用 CUDA 加速
+#   - Same as Windows, auto enables CUDA acceleration
 
-# ========== 核心依赖 ==========
+# ========== Core Dependencies ==========
 
-# faster-whisper 语音识别库
-# 比 OpenAI 原版 whisper 快 4-5 倍，内存占用更少
+# faster-whisper speech recognition library
+# 4-5x faster than OpenAI original whisper, less memory usage
 faster-whisper>=1.0.0
 
-# 翻译库：用于生成中文字幕（日语 → 中文翻译）
-# 使用 Google 翻译免费接口
+# Translation library for Chinese subtitles (Japanese -> Chinese)
+# Uses Google Translate free API
 deep-translator>=1.11.0
 
-# 进度条显示
+# Progress bar display
 tqdm>=4.60.0
 
-# ========== 自动安装的依赖 ==========
-# faster-whisper 会自动安装以下依赖：
-# - ctranslate2: 高性能推理引擎
-# - huggingface_hub: 模型下载
-# - tokenizers: 分词器
-# - av: 音视频处理
-# - numpy: 数值计算
-
+# ========== Auto-installed Dependencies ==========
+# faster-whisper automatically installs:
+# - ctranslate2: High-performance inference engine
+# - huggingface_hub: Model download
+# - tokenizers: Tokenizer
+# - av: Audio/video processing
+# - numpy: Numerical computing
