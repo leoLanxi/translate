@@ -1,0 +1,40 @@
+# 忽略测试视频和输出文件
+input_videos/*.mp4
+input_videos/*.mkv
+input_videos/*.avi
+input_videos/*.mov
+output/*.srt
+output/*.mp4
+output/*.mkv
+
+# 保留文件夹结构
+!input_videos/.gitkeep
+!output/.gitkeep
+
+# Python 虚拟环境
+venv/
+.venv/
+env/
+.env/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDE 配置
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# 日志文件
+*.log
+
+# Whisper 模型缓存（太大，不上传）
+# 模型会在首次运行时自动下载
+.cache/
+
