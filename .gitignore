@@ -1,0 +1,40 @@
+# Ignore test videos and output files
+input_videos/*.mp4
+input_videos/*.mkv
+input_videos/*.avi
+input_videos/*.mov
+output/*.srt
+output/*.mp4
+output/*.mkv
+output/*.json
+
+# Keep folder structure
+!input_videos/.gitkeep
+!output/.gitkeep
+
+# Python virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# IDE config
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Log files
+*.log
+
+# Whisper model cache (too large, don't upload)
+# Models will be downloaded automatically on first run
+.cache/

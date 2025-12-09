@@ -1,0 +1,41 @@
+# Japanese Video Subtitle Generator v3.0 - Python Dependencies
+# ============================================================
+#
+# Install:
+#   pip install -r requirements.txt
+#
+# ========== Cross-Platform Support ==========
+#
+# macOS (Apple Silicon M1/M2/M3):
+#   - Auto uses CPU mode
+#   - If installation fails, ensure Xcode Command Line Tools is installed:
+#     xcode-select --install
+#
+# Windows (NVIDIA GPU - RTX 30/40/50 series recommended):
+#   - Auto detects CUDA, enables GPU acceleration (5-10x faster)
+#   - Optional CUDA support (usually auto-installed):
+#     pip install nvidia-cublas-cu11 nvidia-cudnn-cu11
+#
+# Linux (NVIDIA GPU):
+#   - Same as Windows, auto enables CUDA acceleration
+
+# ========== Core Dependencies ==========
+
+# faster-whisper speech recognition library
+# 4-5x faster than OpenAI original whisper, less memory usage
+faster-whisper>=1.0.0
+
+# Translation library for Chinese subtitles (Japanese -> Chinese)
+# Uses Google Translate free API
+deep-translator>=1.11.0
+
+# Progress bar display
+tqdm>=4.60.0
+
+# ========== Auto-installed Dependencies ==========
+# faster-whisper automatically installs:
+# - ctranslate2: High-performance inference engine
+# - huggingface_hub: Model download
+# - tokenizers: Tokenizer
+# - av: Audio/video processing
+# - numpy: Numerical computing
